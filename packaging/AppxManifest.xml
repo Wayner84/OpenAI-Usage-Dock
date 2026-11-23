@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+         xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+         xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+         IgnorableNamespaces="uap uap3 rescap">
+  <Identity Name="TownsendPrecision.OpenAiUsage" Publisher="CN=Townsend Precision Labs" Version="1.0.2.0" ProcessorArchitecture="x64" />
+  <Properties>
+    <DisplayName>OpenAI usage</DisplayName>
+    <PublisherDisplayName>Townsend Precision Labs</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" />
+    <PackageDependency Name="Microsoft.WindowsAppRuntime.1.8" MinVersion="8000.946.1701.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+  </Dependencies>
+  <Resources><Resource Language="en-US" /></Resources>
+  <Applications>
+    <Application Id="App" Executable="OpenAiUsage.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements DisplayName="OpenAI usage" Description="Remaining OpenAI Codex and Work allowance" BackgroundColor="transparent" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" />
+      <Extensions>
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:ExeServer Executable="OpenAiUsage.exe" Arguments="-RegisterProcessAsComServer" DisplayName="OpenAI usage">
+              <com:Class Id="293948F1-09CE-4B3E-BDB5-2EFACBF04C86" DisplayName="OpenAI usage" />
+            </com:ExeServer>
+          </com:ComServer>
+        </com:Extension>
+        <uap3:Extension Category="windows.appExtension">
+          <uap3:AppExtension Name="com.microsoft.commandpalette" Id="OpenAiUsage" PublicFolder="Public" DisplayName="OpenAI usage" Description="Remaining Codex and Work allowance from your Hermes OpenAI sign-in">
+            <uap3:Properties>
+              <CmdPalProvider>
+                <Activation><CreateInstance ClassId="293948F1-09CE-4B3E-BDB5-2EFACBF04C86" /></Activation>
+                <SupportedInterfaces><Commands /></SupportedInterfaces>
+              </CmdPalProvider>
+            </uap3:Properties>
+          </uap3:AppExtension>
+        </uap3:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

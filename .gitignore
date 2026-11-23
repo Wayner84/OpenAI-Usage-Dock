@@ -1,0 +1,8 @@
+**/bin/
+**/obj/
+artifacts/
+*.msix
+*.cer
+*.pfx
+*.p12
+*.key
